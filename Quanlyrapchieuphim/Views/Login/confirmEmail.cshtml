@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>confirmEmail</title>
+</head>
+<body>
+    <div class="container">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div>@ViewBag.Message</div>
+        }
+        @using (Html.BeginForm("confirmEmail", "Login", FormMethod.Post))
+        {
+            <label class="control-label">Mã xác nhận:</label>
+            @Html.TextBox("MaXacNhan", null, new { @class = "form-control" })
+            <button type="submit" class="btn">Xác nhận</button>
+        }
+    </div>
+</body>
+</html>
+<style>
+    .container {
+        width: 300px; /* Độ rộng mong muốn của khung */
+        margin: 0 auto; /* Để căn giữa */
+        margin-top: 50px; /* Để tạo khoảng cách với phần trên của trang */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    /* Định dạng cho label */
+    .control-label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Định dạng cho input text */
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; /* Đảm bảo tính nhất quán về kích thước */
+        margin-bottom: 10px;
+    }
+
+    /* Định dạng cho button */
+    .btn {
+        padding: 10px 20px;
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        /* Hover effect cho button */
+        .btn:hover {
+            background-color: #0056b3; /* Màu nền khi di chuột vào */
+        }
+</style>

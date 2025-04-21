@@ -1,0 +1,601 @@
+﻿@{
+    ViewBag.Title = "DichVu";
+}
+
+
+@model IEnumerable<Quanlyrapchieuphim.Models.DichVu>
+@{
+    Layout = null;
+}
+<style>
+    .site-header {
+        background-color: #333;
+        color: #fff;
+        font-family: Tahoma, sans-serif;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .site-navigation {
+        padding: 10px 0;
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .menu li {
+            display: inline-block;
+        }
+
+            .menu li a {
+                display: block;
+                padding: 10px 20px;
+                text-decoration: none;
+                color: ghostwhite;
+            }
+
+                .menu li a:hover {
+                    background-color: #555;
+                }
+
+    .custom-button1,
+    .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button1:hover,
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-button1:active,
+        .custom-button:active {
+            transform: translateY(2px);
+        }
+
+    .banner {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        background-color: #f0f0f0;
+        overflow: hidden;
+    }
+
+    .banner-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #333;
+    }
+
+    .carousel-item img {
+        object-fit: cover;
+        max-height: 500px;
+        width: auto;
+        margin: auto;
+    }
+
+    .container select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        color: #555;
+        font-size: 16px;
+    }
+
+    #phim:disabled,
+    #ngay:disabled,
+    #xuatchieu:disabled,
+    #mua-ve:disabled {
+        background-color: #eee;
+        cursor: not-allowed;
+    }
+
+    #mua-ve:enabled {
+        background-color: #007bff;
+    }
+
+        #mua-ve:enabled:hover {
+            background-color: #0056b3;
+        }
+
+    .row {
+        margin-bottom: -20px;
+    }
+
+    .option-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .small-option {
+        flex: 1;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
+    }
+
+
+    .movie-section {
+        margin-top: 20px; /* Điều chỉnh khoảng cách từ phần tử trước */
+    }
+
+
+        .movie-section h3 {
+            display: inline;
+            margin-left: 100px;
+            font-family: Geneva;
+            font-weight: bold; /* Thêm thuộc tính này để in đậm chữ */
+            font-size: 60px;
+        }
+
+
+        .movie-section ul {
+            display: inline;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-bottom: 100px;
+            font-size: 20px;
+        }
+
+            .movie-section ul li {
+                display: inline;
+                margin-left: 10px;
+            }
+
+                .movie-section ul li:first-child {
+                    margin-left: 10px;
+                }
+
+    .review-movie {
+        margin-top: 700px;
+    }
+
+    .movie-corner {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .movie-corner li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+            .movie-corner li:last-child {
+                margin-right: 0;
+            }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 5px 0;
+    }
+
+    .container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-4 {
+        width: calc(100% / 3);
+        padding: 0 15px;
+    }
+
+    h3 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .social-icons {
+        margin-bottom: 20px;
+    }
+
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+            .social-icons li:last-child {
+                margin-right: 0;
+            }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+    .footer-menu li {
+        margin-bottom: 3px;
+    }
+
+    .footer-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .footer-menu a:hover {
+            text-decoration: underline;
+        }
+
+    .copyright {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    .review-movie {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 30px;
+    }
+
+        .review-movie h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .review-movie ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .review-movie ul li {
+                display: inline-block;
+                margin-right: 20px;
+                vertical-align: top;
+            }
+
+                .review-movie ul li:last-child {
+                    margin-right: 0;
+                }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                }
+
+                .review-movie ul li p {
+                    font-size: 16px;
+                    color: #333;
+                    margin-top: 10px;
+                }
+
+                .review-movie ul li img {
+                    border-radius: 5px;
+                    transition: transform 0.3s ease, opacity 0.3s ease;
+                }
+
+                    .review-movie ul li img:hover {
+                        opacity: 0.8;
+                        transform: scale(1.1);
+                        cursor: pointer;
+                    }
+
+    .login-container {
+        text-align: right;
+        margin-top: -65px;
+    }
+
+        .login-container button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+            .login-container button:hover {
+                background-color: white;
+                color: black;
+            }
+
+            .login-container button a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .login-container button a:hover {
+                    color: black;
+                    text-decoration: none;
+                }
+
+    .search-container {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+        background-color: #f3f3f3; /* Màu nền */
+        padding: 5px; /* Khoảng cách giữa các phần tử */
+        border-radius: 5px; /* Bo tròn các góc */
+    }
+
+        .search-container input[type="text"] {
+            padding: 12px; /* Khoảng cách bên trong input */
+            width: 600px; /* Tăng kích thước của ô tìm kiếm */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc input */
+            margin-right: 5px; /* Khoảng cách giữa input và button */
+        }
+
+        .search-container button[type="submit"] {
+            padding: 8px 15px; /* Kích thước của button */
+            background-color: #007bff; /* Màu nền */
+            color: white; /* Màu chữ */
+            border: none; /* Loại bỏ viền */
+            border-radius: 3px; /* Bo tròn góc button */
+            cursor: pointer; /* Con trỏ khi di chuột qua */
+            transition: background-color 0.3s ease; /* Hiệu ứng màu nền khi hover */
+        }
+
+            .search-container button[type="submit"]:hover {
+                background-color: #0056b3; /* Màu nền khi hover */
+            }
+    .vertical-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-gap: 28px;
+        margin-left: 500px;
+        margin-top: -710px;
+    }
+
+        .vertical-grid img {
+            width: 12%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+    
+
+
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Thư viện JavaScript jQuery và Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<header class="site-header">
+
+    <div class="container">
+        <nav class="site-navigation">
+            <div class="menu">
+                <ul>
+                    <li><a href="https://localhost:44371/">Phim</a></li>
+                    <li>
+                    <li>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">Thể loại</option>
+                            </select>
+                        </div>
+                    </li>
+
+
+                    <li><a href="#search">Tìm kiếm</a></li>
+                    <li><a href="#cinema-corner">Góc điện ảnh</a></li>
+                </ul>
+            </div>
+            <div class="login-container">
+
+                @if (Session["TaiKhoan"] == null)
+                {
+                    <button><a href="@Url.Action("", "Login")">Đăng nhập</a></button>
+                    <button><a href="@Url.Action("Register", "Login")">Đăng Ký</a></button>
+
+                }
+                else
+                {
+                    <button><a href="@Url.Action("delete", "Login")">Đăng xuất</a></button>
+                    <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>
+                }
+
+
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<body>
+
+
+
+
+    @using (Html.BeginForm("DichVu", "Home", FormMethod.Post))
+    {
+
+    <div class="service-container">
+        @foreach (var item in Model)
+        {
+
+        <div class="service-item">
+
+            <div class="service-details">
+                <span class="service-name">@item.TenDichVu</span>
+                <span class="service-price">Giá tiền: @item.GiaTien</span>
+                <span class="service-mota">@item.MoTa</span>
+
+            </div>
+            <div class="service-checkbox">
+                <input type="checkbox" name="selectedServices" value="@item.IDDichVu" />
+            </div>
+
+        </div>
+
+        }
+           </div>
+   
+        
+        <button type="submit" class="btn-submit">Xác nhận</button>
+    }
+
+
+    <style>
+        .btn-submit {
+            margin: 10px auto;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+        }
+
+            .btn-submit:hover {
+                background-color: #0069d9;
+            }
+
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            margin-left: 650px;
+            margin-top: 20px; /* Di chuyển lên trên một chút */
+            width: 35%;
+        }
+
+        .service-image {
+            flex: 0 0 80px; /* Kích thước cố định cho phần ảnh */
+            margin-right: 10px; /* Khoảng cách giữa ảnh và nội dung */
+        }
+
+        .service-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-name {
+            font-weight: bold;
+            margin-bottom: 3px; /* Khoảng cách giữa tên dịch vụ và giá tiền */
+        }
+
+        .service-price {
+            color: #007bff; /* Màu sắc cho giá tiền */
+            margin-bottom: 3px; /* Khoảng cách giữa giá tiền và mô tả */
+        }
+
+        .service-mota {
+            font-style: italic;
+        }
+        .service-checkbox input[type="checkbox"] {
+            width: 20px; /* Đặt chiều rộng của checkbox là 20px */
+            height: 20px; /* Đặt chiều cao của checkbox là 20px */
+        }
+
+        h2 {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Căn giữa theo chiều dọc */
+            height: 5vh;
+            font-weight: bold;
+            color: white;
+            background-color: black; /* Đặt màu nền */
+            max-width: 800px; /* Điều chỉnh kích thước */
+            margin: 0 auto; /* Để căn giữa */
+            border: 1px solid #ddd; /* Định dạng khung */
+            border-radius: 5px; /* Định dạng khung */
+            overflow-x: auto; /* Cho phép cuộn ngang nếu tiêu đề quá rộng */
+        }
+    </style>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Giới thiệu</h3>
+                    <p>Đặt vé xem phim mọi lúc mọi nơi với website của chúng tôi. Hỗ trợ khách hàng tận tình, cam kết giá tốt nhất, trải nghiệm website thân thiện và cập nhật thông tin liên tục. Tham gia cộng đồng yêu phim của chúng tôi để chia sẻ niềm đam mê điện ảnh và nhận được nhiều ưu đãi hấp dẫn.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Liên hệ</h3>
+                    <p>
+                        Địa chỉ: Thủ Dầu Một, Bình Dương<br>
+                        Email: kyhienlanh@gmail.com<br>
+                        Điện thoại: 0943575868
+                    </p>
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Mạng xã hội</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+                    <h3>Menu website</h3>
+                    <ul class="footer-menu">
+                        <li><a href="/Home/Index">Trang chủ</a></li>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Sản phẩm</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 - Bản quyền thuộc về HKL CINEMA
+            </div>
+        </div>
+    </footer>
+</body>

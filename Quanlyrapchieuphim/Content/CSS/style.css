@@ -1,0 +1,432 @@
+﻿/* Định dạng chung cho header */
+.site-header {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Định dạng container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+    /* Logo HKL CINEMA */
+    .container > a {
+        font-size: 20px;
+        font-weight: bold;
+        color:#ff9900;
+        text-decoration: none;
+        margin-left:auto;
+    }
+
+        .container > a span {
+            color: #ffcc00;
+        }
+
+/* Định dạng thanh navigation */
+.site-navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+/* Định dạng menu */
+.menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+    .menu ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .menu ul a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+            .menu ul a:hover {
+                color: #ffcc00;
+            }
+
+/* Dropdown thể loại phim */
+#movieGenres {
+    position: relative;
+}
+
+#genreDropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight:bold;
+}
+
+/* Định dạng phần login-container */
+.login-container {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+    .login-container button {
+        background-color: ghostwhite;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+    }
+
+        .login-container button a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .login-container button:hover {
+            background-color: #ff9900;
+        }
+
+
+/* Định dạng chung cho thanh tìm kiếm */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    /* Ô nhập tìm kiếm */
+    .search-container input[type="text"] {
+        width: 600px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+        .search-container input[type="text"]:focus {
+            border-color: #ffcc00;
+        }
+
+    /* Nút tìm kiếm */
+    .search-container button {
+        background-color: #ff9900;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin-left: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .search-container button:hover {
+            background-color: #e68a00;
+        }
+
+
+/* Định dạng phần nội dung chính */
+.main_content {
+    max-width: 1500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Định dạng danh mục phim */
+.movie-section ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+    .movie-section ul a {
+        text-decoration: none;
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 20px;
+        background-color: white;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .movie-section ul a:hover {
+            background-color: #e6b800;
+            color: white;
+        }
+/* Định dạng chung cho footer */
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 0;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Định dạng các cột trong footer */
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col-md-4 {
+    width: 30%;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+/* Định dạng đoạn văn bản */
+p {
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Định dạng danh sách mạng xã hội */
+.social-icons {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 10px 0;
+}
+
+    .social-icons li a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #444;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        font-size: 18px;
+        transition: background 0.3s ease;
+    }
+
+        .social-icons li a:hover {
+            background-color: #ffcc00;
+            color: #222;
+        }
+/* Tổng quan */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Tiêu đề danh sách phim */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin: 20px 0;
+    text-align:center;
+}
+
+    .section-title span {
+        margin: 0 15px;
+        cursor: pointer;
+        padding-bottom: 5px;
+        border-bottom: 3px solid transparent;
+    }
+
+    .section-title .active {
+        color: #007bff;
+        border-bottom: 3px solid #007bff;
+    }
+
+/* Tổng quan */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Tiêu đề danh sách phim */
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin: 20px 0;
+}
+
+    .section-title button {
+        background: transparent;
+
+        color: black;
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: all 0.3s;
+    }
+
+        .section-title button:hover {
+            background: #ff9900;
+            color: white;
+        }
+
+/* Container danh sách phim */
+.movie-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* Danh sách phim */
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Mỗi thẻ phim */
+.movie-card {
+    width: 280px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    padding-bottom: 15px;
+}
+
+    .movie-card:hover {
+        transform: translateY(-5px);
+    }
+
+/* Hình ảnh phim */
+.movie-image {
+    position: relative;
+    width: 100%;
+    height: 370px;
+    overflow: hidden;
+}
+
+    .movie-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-bottom: 2px solid #ddd;
+    }
+/* Thông tin phim */
+.movie-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 12px 0;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Nút mua vé và chi tiết */
+.buy-ticket,
+.detail-ticket {
+    display: block;
+    width: 80%;
+    margin: 8px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.buy-ticket {
+    background: #ff9900;
+    color: white;
+}
+
+    .buy-ticket:hover {
+        background: #0056b3;
+    }
+
+.de
+/* Định dạng menu website */
+.footer-menu {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+    .footer-menu li {
+        margin-bottom: 8px;
+    }
+
+        .footer-menu li a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+            .footer-menu li a:hover {
+                color: #ffcc00;
+            }
+
+/* Định dạng phần bản quyền */
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #444;
+    font-size: 14px;
+    color: #aaa;
+}
+
+

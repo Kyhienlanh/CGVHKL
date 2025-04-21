@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.SuatChieu>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID suất chiếu
+        </th>
+        <th>
+            Tên suất chiếu
+        </th>
+        <th>
+           Ngày chiếu
+        </th>
+        <th>
+            Thời gian chiếu
+        </th>
+        <th>
+            ID phòng chiếu
+        </th>
+        <th>
+            ID Phim
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="separator">
+            <td>
+                @Html.DisplayFor(modelItem => item.IDSuatChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSuatChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPhongChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPhim)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new {  id = item.IDSuatChieu })" class="btn btn-warning" role="button">Edit</a>
+                <a href="@Url.Action("Details", new {  id = item.IDSuatChieu })" class="btn btn-primary" role="button">Details</a>
+                <a href="@Url.Action("Delete", new {  id = item.IDSuatChieu })" class="btn btn-danger" role="button">Delete</a>
+
+            </td>
+        </tr>
+    }
+</table>

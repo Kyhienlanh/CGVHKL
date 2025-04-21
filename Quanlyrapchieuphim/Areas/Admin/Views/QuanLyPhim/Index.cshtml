@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.Phim>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên phim
+        </th>
+        <th>
+           Tên ảnh
+        </th>
+        <th>
+            Thể loại
+        </th>
+        <th>
+           Thời lượng
+        </th>
+        <th>
+            Khởi chiếu
+        </th>
+        <th>
+            Năm sản xuất
+        </th>
+        <th>
+            Đạo diễn
+        </th>
+        <th>
+            Diễn viên
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="separator">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenAnh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoiChieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamSanXuat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaoDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienVien)
+            </td>
+
+            <td>
+                <a href="@Url.Action("Edit", new {  id = item.IDPhim })" class="btn btn-warning" role="button">Edit</a>
+                <a href="@Url.Action("Details", new {  id = item.IDPhim })" class="btn btn-primary" role="button">Details</a>
+                <a href="@Url.Action("Delete", new {  id = item.IDPhim })" class="btn btn-danger" role="button">Delete</a>
+
+            </td>
+        </tr>
+    }
+
+</table>

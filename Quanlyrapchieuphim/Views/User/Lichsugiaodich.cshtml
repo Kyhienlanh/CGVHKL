@@ -1,0 +1,84 @@
+﻿﻿@model IEnumerable<Quanlyrapchieuphim.Models.HoaDon>
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lịch sử giao dịch</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Add custom CSS styles here */
+        body {
+            padding: 20px;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .table th, .table td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h2>Lịch sử giao dịch</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID Hóa Đơn</th>
+                    <th>Tên Hóa Đơn</th>
+                    <th>Tổng Tiền</th>
+                    <th>Ghi Chú</th>
+                    <th>Ngày Tạo</th>
+                    <th>ID Vé</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.IDHoaDon)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TenHoaDon)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TongTien)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GhiChu)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IDVe)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your custom JavaScript -->
+    <script>
+                // Add your custom JavaScript code here (if needed)
+    </script>
+</body>
+</html>

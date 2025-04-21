@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.Phim>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenPhim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhoiChieu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamSanXuat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DaoDien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienVien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenPhim)
+        </td>
+        <td>
+            <img src="~/Images/@item.TenAnh" alt="Thumbnail Image 1" class="img- responsive img-rounded imgbook" style="width:400px;">
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiLuong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhoiChieu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NamSanXuat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaoDien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DienVien)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDPhim }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDPhim }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDPhim })
+        </td>
+    </tr>
+}
+
+</table>

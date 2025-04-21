@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@{
+    // Kiểm tra xem ViewBag.iddv có tồn tại và không null trước khi sử dụng
+    if (ViewBag.iddv != null)
+    {
+        // Hiển thị danh sách các ID dịch vụ đã chọn
+        foreach (var id in ViewBag.iddv)
+        {
+            <p>@id</p>
+        }
+    }
+    else
+    {
+        <p>Không có dịch vụ nào được chọn</p>
+    }
+}

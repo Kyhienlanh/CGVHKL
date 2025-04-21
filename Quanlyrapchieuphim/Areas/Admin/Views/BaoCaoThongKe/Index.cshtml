@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.HoaDon>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+
+
+@using (Html.BeginForm("ThongKeThangNam", "BaoCaoThongKe", FormMethod.Post))
+{
+    <p>
+        Start Date: <input type="date" name="startDate" />
+        End Date: <input type="date" name="endDate" />
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            Tên hóa đơn
+        </th>
+        <th>
+            Tổng tiền
+        </th>
+        <th>
+            Ghi chú
+        </th>
+        <th>
+            Ngày tạo
+        </th>
+        <th>
+            Tên vé
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="separator">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHoaDon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ve1.TenVe)
+            </td>
+
+        </tr>
+
+    }
+
+
+</table>
+<h4>Tổng tiền : @ViewBag.TongTien vnd</h4>

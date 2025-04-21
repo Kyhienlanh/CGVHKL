@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.NguoiDung>
+@{ 
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên người dùng
+        </th>
+        <th>
+            Tên chức vụ
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+           Số điện thoại
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HashPass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quyen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiDangNhap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XacNhanEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaXacNhan)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="separator">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNguoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenChucVu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HashPass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quyen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiDangNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XacNhanEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaXacNhan)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new {  id = item.IDNguoiDung })" class="btn btn-warning" role="button">Edit</a>
+                <a href="@Url.Action("Details", new {  id = item.IDNguoiDung })" class="btn btn-primary" role="button">Details</a>
+                <a href="@Url.Action("Delete", new {  id = item.IDNguoiDung })" class="btn btn-danger" role="button">Delete</a>
+
+            </td>
+        </tr>
+    }
+
+</table>

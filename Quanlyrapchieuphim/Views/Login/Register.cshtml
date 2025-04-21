@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+        .control-label {
+            font-weight: bold;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("register", "Login", FormMethod.Post))
+        {
+            <label class="control-label">Tên:</label>
+            @Html.TextBox("Username", null, new { @class = "form-control" })
+            <label class="control-label">Số điện thoại:</label>
+            @Html.TextBox("sdt", null, new { @class = "form-control" })
+            <label class="control-label">Email:</label>
+            @Html.TextBox("Email", null, new { @class = "form-control" })
+            <label class="control-label">Mật khẩu:</label>
+            @Html.Password("MatKhau", null, new { @class = "form-control" })
+            <label class="control-label">Nhập lại Mật khẩu:</label>
+            @Html.Password("NhapLaiMatKhau", null, new { @class = "form-control" })
+
+
+
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+
+        }
+        @if (Request.HttpMethod == "POST")
+        {
+            // Render confirmEmail action result if form was submitted
+            @Html.Action("confirmEmail")
+        }
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.NguoiDung>
+@{
+
+    Layout = null;
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Ry7Eu6WvRkjwS67Sv5Xu5z/6jnDqKC2wujv6J+mRlSffXgQk1vzlh1wUEmV3vXN6+LlZpvLSjPvZflDpBoW78w==" crossorigin="anonymous" />
+
+</head>
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    /* Header */
+    .login-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: #222;
+        color: white;
+        padding: 15px 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+        .login-container button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .login-container button:hover {
+                background-color: white;
+                color: black;
+            }
+
+            .login-container button a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .login-container button a:hover {
+                    color: black;
+                }
+
+    /* Main Content */
+    .main_content {
+        width: 80%;
+        margin: 30px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navigation Menu */
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+    }
+
+        ul li {
+            margin: 10px 20px;
+        }
+
+            ul li a {
+                text-decoration: none;
+                color: #555;
+                font-size: 18px;
+                font-weight: 500;
+                padding: 8px 15px;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+
+                ul li a:hover {
+                    color: #007bff;
+                    background-color: rgba(0, 123, 255, 0.1);
+                }
+
+    /* Sections */
+    #account-info, #transaction-history {
+        display: none;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button Styles */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<script>
+    // Sử dụng jQuery
+        $(document).ready(function () {
+            // Hiển thị thông tin tài khoản khi trang web được tải hoàn tất
+            showAccountInfo();
+    });
+
+        function showAccountInfo() {
+            document.getElementById('account-info').style.display = 'block';
+        document.getElementById('transaction-history').style.display = 'none';
+    }
+
+        function showTransactionHistory() {
+            document.getElementById('account-info').style.display = 'none';
+        document.getElementById('transaction-history').style.display = 'block';
+    }
+
+</script>
+<div class="login-container">
+    <div class="home">
+        <button><a href="@Url.Action("Index", "Home")">Trang chủ</a></button>
+    </div>
+    
+    @if (Session["TaiKhoan"] == null)
+    {
+        <button><a href="@Url.Action("Index", "Login")">Đăng nhập</a></button>
+        <button><a href="@Url.Action("Register", "Login")">Đăng Ký</a></button>
+
+    }
+    else
+    {
+        <button><a href="@Url.Action("delete", "Login")">Đăng xuất</a></button>
+        <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>
+    }
+
+
+</div>
+
+<body>
+    <div class="main_content">
+        <div>
+            
+            <ul>
+                <li><a onclick="showAccountInfo()">Thông tin tài khoản</a></li>
+                <li><a onclick="showTransactionHistory()">Lịch sử giao dịch</a></li>
+            </ul>
+
+            <!-- Danh sách phim đang chiếu -->
+            <ul id="account-info" style="display: none;">
+                @Html.Action("TaiKhoan", "User")
+
+            </ul>
+
+
+
+            <!-- Danh sách phim sắp chiếu -->
+            <ul id="transaction-history" style="display: none;">
+                @Html.Action("Lichsugiaodich", "User")
+            </ul>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+
+
+
+
+
+

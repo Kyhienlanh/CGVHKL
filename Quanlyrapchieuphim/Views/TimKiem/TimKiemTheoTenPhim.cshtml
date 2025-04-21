@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.Phim>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách phim</title>
+    <link href="~/Content/style.css" rel="stylesheet" /> <!-- Đường dẫn đến tệp CSS -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Sử dụng font chữ thích hợp */
+            background-color: #f4f4f4; /* Màu nền */
+            margin: 0; /* Xóa margin mặc định */
+            padding: 0; /* Xóa padding mặc định */
+        }
+
+        h2 {
+            text-align: center; /* Căn chỉnh tiêu đề */
+            margin-top: 10px; /* Khoảng cách từ trên xuống */
+            color: #333; /* Màu chữ */
+        }
+
+        .phim-container {
+            display: flex; /* Sử dụng flexbox để các phim nằm cùng một hàng */
+            flex-wrap: wrap; /* Cho phép các phim xuống dòng khi không đủ không gian */
+            justify-content: center; /* Canh lề giữa của container */
+            margin-top: 30px; /* Khoảng cách từ trên xuống */
+        }
+
+        .phim-item {
+            width: 300px; /* Độ rộng của mỗi phim */
+            margin: 20px; /* Khoảng cách giữa các phim */
+            background-color: #fff; /* Màu nền */
+            border-radius: 10px; /* Bo tròn các góc */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Định dạng shadow cho phim */
+            transition: transform 0.3s; /* Hiệu ứng khi hover */
+        }
+
+            .phim-item:hover {
+                transform: translateY(-5px); /* Di chuyển phim lên một chút khi rê chuột vào */
+            }
+
+            .phim-item img {
+                width: 100%; /* Đảm bảo hình ảnh lấp đầy kích thước của phim */
+                height: auto; /* Chiều cao tự động để duy trì tỉ lệ */
+                border-top-left-radius: 10px; /* Bo tròn góc trên bên trái */
+                border-top-right-radius: 10px; /* Bo tròn góc trên bên phải */
+            }
+
+            .phim-item .phim-info {
+                padding: 15px; /* Khoảng cách bên trong phim */
+            }
+
+            .phim-item h3 {
+                margin-left: auto;
+                font-size: 20px; /* Kích thước của tiêu đề phim */
+                margin-top: 10px; /* Khoảng cách giữa hình ảnh và tiêu đề */
+                margin-bottom: 10px; /* Khoảng cách giữa tiêu đề và thông tin khác */
+                color: #333; /* Màu chữ */
+                margin-left: 10px;
+            }
+
+            .phim-item p {
+                margin: 10px; /* Loại bỏ margin mặc định của đoạn văn bản */
+                color: #666; /* Màu chữ */
+            }
+
+            .phim-item .button-container {
+                margin-top: 5px; /* Khoảng cách giữa nút và thông tin phim */
+                text-align: center; /* Căn chỉnh các nút vào giữa */
+            }
+
+            .phim-item button {
+                padding: 20px 40px; /* Kích thước của nút */
+                background-color: whitesmoke; /* Màu nền của nút */
+                color: black; /* Màu chữ của nút */
+                border: none; /* Loại bỏ đường viền */
+                border-radius: 10px; /* Bo tròn các góc của nút */
+                cursor: pointer; /* Đổi con trỏ thành dấu tay khi rê chuột */
+                transition: background-color 0.3s; /* Hiệu ứng hover */
+                margin-top: 10px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+                .phim-item button:hover {
+                    background-color: darkorange; /* Màu nền của nút khi rê chuột vào */
+                }
+    </style>
+</head>
+<body>
+
+
+    <div class="phim-container">
+        @foreach (var item in Model)
+        {
+            <div class="phim-item">
+                <img src="~/Images/@item.TenAnh" alt="Hình ảnh" />
+                <h3>@item.TenPhim</h3>
+                <p>Thể loại: @item.TheLoai</p>
+                <p>Thời lượng: @item.ThoiLuong phút</p>
+                <div class="button-container">
+                    <button onclick="location.href='@Url.Action("DatVe", "Phim", new { id = item.IDPhim })'">ĐẶT VÉ</button>
+                    <button onclick="window.location.href='@Url.Action("ChiTietPhim", "Home", new { id = item.IDPhim })'" class="btn btn-danger">CHI TIẾT PHIM</button>
+
+                </div>
+            </div>
+        }
+    </div>
+</body>
+
+
+
+</html>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Quanlyrapchieuphim.Models.HoaDon>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+<style>
+    th {
+        color: red;
+    }
+
+    tr.separator {
+        border-bottom: 1px solid pink; /* Change border color to green */
+    }
+</style>
+
+@using (Html.BeginForm("Index", "BaoCaoThongKe", FormMethod.Post))
+{
+    <p>
+        Theo Ngày <input type="date" name="startDate" />
+
+        <input type="submit" value="Filter" />
+    </p>
+}
+@using (Html.BeginForm("ThongKeThangNam", "BaoCaoThongKe", FormMethod.Post))
+{
+    <p>
+        Ngày bắt đầu: <input type="date" name="startDate" />
+        Ngày kết thúc: <input type="date" name="endDate" />
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenHoaDon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongTien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ve1.TenVe)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="separator">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHoaDon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ve1.TenVe)
+            </td>
+
+        </tr>
+
+    }
+
+
+</table>
+<h4>Tổng tiền : @ViewBag.TongTien vnd</h4>

@@ -1,0 +1,94 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .invoice-title {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .invoice-table th,
+            .invoice-table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .invoice-table th {
+                background-color: #f8f9fa;
+            }
+
+        .invoice-total {
+            font-weight: bold;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="invoice-header">
+            <h2 class="invoice-title">Invoice</h2>
+        </div>
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên hóa đơn</th>
+                    <th>Tổng tiền</th>
+                    <th>Ghi chú</th>
+                    <th>Ngày tạo</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IDHoaDon</td>
+                        <td>@item.TenHoaDon</td>
+                        <td>@item.TongTien</td>
+                        <td>@item.GhiChu</td>
+                        <td>@item.NgayTao</td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

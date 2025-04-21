@@ -1,0 +1,182 @@
+﻿@{ ViewBag.Title = "ChiTietPhim";
+    Layout = ""; }
+
+<style>
+
+    .phim-content {
+        display: flex;
+        flex-direction: row; /* Xếp nội dung theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 20px; /* Khoảng cách giữa ảnh và chữ */
+        padding: 120px;
+    }
+
+        .phim-content img {
+            width: 350px; /* Kích thước ảnh cố định */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .phim-content img:hover {
+                transform: scale(1.05);
+            }
+
+    .phim-details {
+        flex: 1; /* Chiếm phần còn lại của không gian */
+        text-align: left; /* Căn chữ về bên trái */
+    }
+
+        .phim-details h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .phim-details p {
+            font-size: 18px;
+            color: #555;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+            .phim-details p span {
+                font-weight: bold;
+                color: gray;
+            }
+
+
+
+    /* Lịch chiếu */
+    .lich-chieu {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #d9534f;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .lich-chieu-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .lich-chieu-item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .lich-chieu-item:hover {
+            transform: translateY(-5px);
+        }
+
+
+
+</style>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKL CINEMA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/CSS/style.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="#search">HKL CINEMA<span>.</span></a>
+            <nav class="site-navigation">
+                <div class="menu">
+                    <ul>
+                        <a href="/">PHIM</a>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">THỂ LOẠI</option>
+                            </select>
+                        </div>
+                        <a href="#search">TÌM KIẾM</a>
+                        <a href="#cinema-corner">GÓC ĐIỆN ẢNH</a>
+                    </ul>
+                </div>
+                <div class="login-container">
+                    @if (Session["TaiKhoan"] == null)
+                    {
+                        <button><a href="@Url.Action("Index", "Login")">ĐĂNG NHẬP</a></button>
+                        <button><a href="@Url.Action("Register", "Login")">ĐĂNG KÝ</a></button> }
+                    else
+                    {
+                        <button><a href="@Url.Action("delete", "Login")">ĐĂNG XUẤT</a></button>
+                        <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>}
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Body -->
+    @foreach (var item in Model)
+    {
+        <div class="phim-container">
+            <div class="phim-content">
+                <img src="~/Images/@item.TenAnh" alt="Hình ảnh" onclick="showDetails(this)" data-phimid="@item.IDPhim" />
+                <div class="phim-details">
+                    <h2>@item.TenPhim</h2>
+                    <p><span style="font-weight:bold; color: gray">Thể loại: </span> @item.TheLoai</p>
+                    <p><span style="font-weight:bold; color: gray">Thời lượng:</span> @item.ThoiLuong phút</p>
+                    <p><span style="font-weight:bold; color: gray">Diễn viên:</span> @item.DienVien</p>
+                    <p><span style="font-weight: bold; color: gray">Đạo diễn:</span> @item.DaoDien</p>
+                    <p style="word-wrap: break-word; overflow-wrap: break-word; white-space: pre-line;"><span style="font-weight: bold; color: gray">Nội dung:</span> @item.NoiDung</p>
+                    <!-- Thêm các thông tin khác về phim ở đây -->
+                </div>
+            </div>
+        </div>}
+
+
+    <h1 class="lich-chieu">LỊCH CHIẾU</h1>
+    @Html.Action("LichChieu", "Home")
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Giới thiệu</h3>
+                    <p>Đặt vé xem phim mọi lúc mọi nơi với website của chúng tôi...</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Liên hệ</h3>
+                    <p>Địa chỉ: Thủ Dầu Một, Bình Dương<br>Email: kyhienlanh@gmail.com<br>Điện thoại: 0943575868</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Mạng xã hội</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2024 - Bản quyền thuộc về HKL CINEMA</div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+

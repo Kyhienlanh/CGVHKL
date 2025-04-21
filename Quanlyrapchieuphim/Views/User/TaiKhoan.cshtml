@@ -1,0 +1,90 @@
+﻿@model Quanlyrapchieuphim.Models.NguoiDung
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TÀI KHOẢN</title>
+    <style>
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #007bff;
+            display: inline-block;
+            width: 150px; /* Độ rộng của nhãn */
+        }
+
+        span {
+            display: inline-block;
+            margin-left: 10px; /* Khoảng cách giữa nhãn và giá trị */
+        }
+
+            span:first-child {
+                margin-left: 0; /* Không có khoảng cách ở bên trái của nhãn đầu tiên */
+            }
+
+        .info-item {
+            margin-bottom: 10px; /* Khoảng cách giữa các thông tin */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h2>THÔNG TIN TÀI KHOẢN</h2>
+        <div class="container">
+            @if (Model != null)
+            {
+                <div class="info-item">
+                    <label>Tên người dùng: </label>
+                    <span>@Model.TenNguoiDung</span>
+                </div>
+                <div class="info-item">
+                    <label>Số điện thoại:</label>
+                    <span>@Model.SoDienThoai</span>
+                </div>
+                <div class="info-item">
+                    <label>Email:</label>
+                    <span>@Model.Email</span>
+                </div>
+                <div class="info-item">
+                    <label>Địa chỉ:</label>
+                    <span>@Model.DiaChi</span>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+</html>

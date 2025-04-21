@@ -1,0 +1,349 @@
+﻿﻿@model IEnumerable<Quanlyrapchieuphim.Models.ChoNgoi__SuatChieu>
+@{
+    Layout = null;
+}
+<style>
+    /* Định dạng vùng chứa ghế */
+    .seat-map {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Định dạng ghế */
+    .custom-radio {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 16px;
+        user-select: none;
+        padding: 10px;
+    }
+
+        /* Ẩn radio mặc định */
+        .custom-radio input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Định dạng nút chọn ghế */
+    .checkmark {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-color: #ddd;
+        border-radius: 5px;
+        border: 2px solid #999;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Khi chọn ghế */
+    .custom-radio input[type="radio"]:checked + .checkmark {
+        background-color: green;
+        border-color: darkgreen;
+        color: white;
+    }
+
+    /* Trạng thái ghế đã hết */
+    .custom-radio input[type="radio"]:disabled + .checkmark {
+        background-color: red;
+        border-color: darkred;
+        color: white;
+        opacity: 0.7;
+    }
+
+    /* Hiệu ứng khi di chuột vào ghế có thể chọn */
+    .custom-radio input[type="radio"]:not(:disabled) + .checkmark:hover {
+        background-color: lightgreen;
+        border-color: green;
+    }
+
+    /* Chữ "Màn hình" */
+    .centered-h5 {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Thanh ngang */
+    .separator-line {
+        width: 80%;
+        height: 2px;
+        background-color: black;
+        margin: 10px auto;
+    }
+
+    /* Nút chọn ghế */
+    .btn-chose {
+        display: block;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 20px auto;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+        .btn-chose:hover {
+            background-color: #0056b3;
+        }
+
+</style>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Ry7Eu6WvRkjwS67Sv5Xu5z/6jnDqKC2wujv6J+mRlSffXgQk1vzlh1wUEmV3vXN6+LlZpvLSjPvZflDpBoW78w==" crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKL CINEMA</title>
+    <!-- Link to Font Awesome for icons -->
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="~/Content/CSS/style.css" />
+</head>
+
+<!-- Thư viện CSS Bootstrap -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Thư viện JavaScript jQuery và Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<!-- Thư viện CSS Bootstrap -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Thư viện JavaScript jQuery và Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+
+<script>
+    function showButtons(image) {
+        // Lấy ra phần tử cha của hình ảnh
+        var parent = image.parentNode;
+
+        // Lấy ra phần tử chứa các button
+        var buttons = parent.querySelector('.buttons');
+
+        // Hiển thị các button
+        buttons.style.display = 'block';
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#phim').change(function () {
+                var selectedPhimId = $(this).val(); // Lấy ID của phim được chọn
+                if (selectedPhimId !== "") {
+                    $.ajax({
+                        url: '/Home/GetNgayChieu', // Đường dẫn đến action GetNgayChieu trong controller Home
+                        type: 'GET',
+                        data: { IDPhim: selectedPhimId }, // Truyền IDPhim vào action
+                        success: function (result) {
+                            // Xóa tất cả các option cũ trong dropdown ngày chiếu
+                            $('#ngay').empty();
+                            // Thêm các option mới từ kết quả trả về
+                            $.each(result, function (index, ngay) {
+                                $('#ngay').append($('<option></option>').val(ngay).text(ngay));
+                            });
+                        }
+                    });
+                } else {
+                    // Nếu không chọn phim, xóa tất cả các option trong dropdown ngày chiếu
+                    $('#ngay').empty();
+                    $('#ngay').append($('<option></option>').val('').text('Chọn ngày'));
+                }
+            });
+        });
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#phim').change(function () {
+            console.log("Dropdown list 'Chọn phim' đã thay đổi giá trị."); // Kiểm tra xem sự kiện thay đổi có hoạt động không
+            if ($(this).val() !== "") {
+                $('#ngay').prop('disabled', false); // Kích hoạt dropdown list "Chọn ngày" khi có phim được chọn
+            } else {
+                $('#ngay').prop('disabled', true); // Khóa dropdown list "Chọn ngày" khi không có phim được chọn
+                $('#xuatchieu').prop('disabled', true); // Khóa dropdown list "Chọn xuất chiếu" khi không có phim được chọn
+                $('#mua-ve').prop('disabled', true); // Khóa nút "Mua vé" khi không có phim được chọn
+            }
+        });
+    });
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        // Đường dẫn đến action trong controller để chuyển hướng khi người dùng chọn thể loại phim
+        var redirectUrl = '/TimKiem/TimKiemTheoTheLoai';
+
+        // Lấy danh sách thể loại phim và điền vào dropdown list khi trang được tải
+        $.get('/TimKiem/GetGenres', function (data) {
+            $.each(data, function (index, item) {
+                $('#genreDropdown').append($('<option>', {
+                    value: item,
+                    text: item
+                }));
+            });
+        });
+
+        // Xử lý sự kiện khi người dùng đã chọn một thể loại phim
+        $('#genreDropdown').change(function () {
+            var selectedGenre = $(this).val();
+            if (selectedGenre) {
+                // Chuyển hướng người dùng đến action trong controller với thể loại phim đã chọn
+                window.location.href = redirectUrl + '?genre=' + selectedGenre;
+            }
+        });
+    });
+
+</script>
+<body>
+    <header class="site-header">
+
+        <div class="container">
+            <a href="#search">HKL CINEMA<span>.</span></a>
+            <nav class="site-navigation">
+                <div class="menu">
+                    <ul>
+                        <a href="https://localhost:44371/">PHIM</a>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">THỂ LOẠI</option>
+                            </select>
+                        </div>
+                        <a href="#search">TÌM KIẾM</a>
+                        <a href="#cinema-corner">GÓC ĐIỆN ẢNH</a>
+                    </ul>
+                </div>
+                <div class="login-container">
+
+                    @if (Session["TaiKhoan"] == null)
+                    {
+                        <button><a href="@Url.Action("Index", "Login")">ĐĂNG NHẬP</a></button>
+                        <button><a href="@Url.Action("Register", "Login")">ĐĂNG KÝ</a></button>
+
+                    }
+                    else
+                    {
+                        <button><a href="@Url.Action("delete", "Login")">ĐĂNG XUẤT</a></button>
+                        <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>
+                    }
+
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+
+
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Images/god-x-kong-2048_1711942313253.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/mobile-suit-gundam-seed-freedom-3_1712027621954.jpg" class="d-block w-100" alt="...">
+
+            </div>
+            <div class="carousel-item">
+                <img src="~/Images/18x2-2048_1712028163819.jpg" class="d-block w-100" alt="...">
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+
+    <div class="search-container">
+        @using (Html.BeginForm("TimKiemTheoTenPhim", "TimKiem", FormMethod.Post))
+        {
+            <input type="text" name="tenPhim" placeholder="Tìm kiếm...">
+            <button type="submit">Tìm kiếm</button>
+        }
+
+    </div>
+    @using (Html.BeginForm("test", "Home"))
+    {
+        var modelList = Model.ToList(); // Convert IEnumerable to List
+
+        for (int i = 0; i < modelList.Count(); i++)
+        {
+            var TenCho = i + 1;
+
+            if (i % 10 == 0)
+            {
+                @:</div> <!-- Close the previous row -->
+                @:<div class="seat-map">
+ <!-- Open a new row -->
+                }
+
+                <label class="custom-radio">
+                    @if (modelList[i].trangthai != null)
+                    {
+                        <input type="radio" id="place @i" name="selectedPlace" value="Unavailable" autocomplete="off" disabled />
+                        <span class="checkmark"></span>
+                        @TenCho <p style="color: red">Hết)</p>
+                    }
+                    else
+                    {
+                        <input type="radio" id="place @i" name="selectedPlace" value="@modelList[i].ChoNgoi_SuatChieu" autocomplete="off" />
+                        <span class="checkmark"></span>
+                        @TenCho
+                    }
+                </label>
+            }
+        @:</div> <!-- Close the last row -->
+        <hr class="separator-line">
+        
+
+        <!-- Horizontal line -->
+
+        <!-- Horizontal line -->
+        <!-- Horizontal line -->
+        <input type="submit" class="btn-chose" value="TIẾP TỤC" style="padding-left:30px">
+    }
+
+
+
+
+</body>
+
+
+

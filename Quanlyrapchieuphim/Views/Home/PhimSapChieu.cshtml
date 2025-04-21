@@ -1,0 +1,200 @@
+﻿<style>
+    .phim-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    .phim-item {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 270px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+        padding-bottom: 15px;
+        border: 1px solid #ddd;
+    }
+
+        .phim-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .phim-item img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .phim-item h3 {
+            font-size: 16px;
+            color: #ff9800;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+        .phim-item p {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+            .phim-item p b {
+                font-weight: bold;
+            }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        align-items: center;
+    }
+
+        .button-container button {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+            .button-container button:first-child {
+                background-color: #ff9800;
+                color: white;
+            }
+
+                .button-container button:first-child:hover {
+                    background-color: #e68900;
+                }
+
+            .button-container button:last-child {
+                background-color: #ffffff;
+                color: black;
+                border: 1px solid #ccc;
+            }
+
+                .button-container button:last-child:hover {
+                    background-color: #e0e0e0;
+                }
+</style>
+@model IEnumerable<Quanlyrapchieuphim.Models.Phim>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKL CINEMA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/CSS/style.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="#search">HKL CINEMA<span>.</span></a>
+            <nav class="site-navigation">
+                <div class="menu">
+                    <ul>
+                        <a href="/">PHIM</a>
+                        <div id="movieGenres">
+                            <select id="genreDropdown">
+                                <option value="">THỂ LOẠI</option>
+                            </select>
+                        </div>
+                        <a href="#search">TÌM KIẾM</a>
+                        <a href="#cinema-corner">GÓC ĐIỆN ẢNH</a>
+                    </ul>
+                </div>
+                <div class="login-container">
+                    @if (Session["TaiKhoan"] == null)
+                    {
+                        <button><a href="@Url.Action("Index", "Login")">ĐĂNG NHẬP</a></button>
+                        <button><a href="@Url.Action("Register", "Login")">ĐĂNG KÝ</a></button>
+                    }
+                    else
+                    {
+                        <button><a href="@Url.Action("delete", "Login")">ĐĂNG XUẤT</a></button>
+                        <button>@Html.ActionLink("Tài khoản", "Index", "User")</button>
+                    }
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Body -->
+    <div class="search-container">
+        @using (Html.BeginForm("TimKiemTheoTenPhim", "TimKiem", FormMethod.Post))
+        {
+            <input type="text" name="tenPhim" placeholder="Tìm kiếm...">
+            <button type="submit">Tìm kiếm</button>
+        }
+    </div>
+    <h2 class="section-title">
+        <button><a href="@Url.Action("PhimDangChieu", "Home")">PHIM ĐANG CHIẾU</a></button>
+        <button><a href="@Url.Action("PhimSapChieu", "Home")">PHIM SẮP CHIẾU</a></button>
+    </h2>
+
+    <div class="phim-container">
+
+        @foreach (var item in Model)
+        {
+            <div class="phim-item">
+                <img src="~/Images/@item.TenAnh" alt="Hình ảnh" />
+                <h3>@item.TenPhim</h3>
+                <p>Thể loại: @item.TheLoai</p>
+                <p>Thời lượng: @item.ThoiLuong phút</p>
+                <div class="button-container">
+                    <button onclick="location.href='@Url.Action("ChiTietPhim", "Home", new { id = item.IDPhim })'">MUA VÉ</button>
+                    <button onclick="window.location.href='@Url.Action("ChiTietPhim", "Home", new { id = item.IDPhim })'" class="btn btn-danger">CHI TIẾT</button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Giới thiệu</h3>
+                    <p>Đặt vé xem phim mọi lúc mọi nơi với website của chúng tôi...</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Liên hệ</h3>
+                    <p>Địa chỉ: Thủ Dầu Một, Bình Dương<br>Email: kyhienlanh@gmail.com<br>Điện thoại: 0943575868</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Mạng xã hội</h3>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2024 - Bản quyền thuộc về HKL CINEMA</div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,182 @@
+﻿@model Quanlyrapchieuphim.Models.NguoiDung
+@{
+    Layout = "~/Areas/Admin/Views/Shared/ViewPage1.cshtml";
+}
+
+<div>
+    <h2>QUẢN LÝ TÀI KHOẢN</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenChucVu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenChucVu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HashPass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HashPass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quyen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiDangNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.XacNhanEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.XacNhanEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaXacNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaXacNhan)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-delete">
+                <i class="fas fa-trash-alt"></i> Delete
+            </button> |
+            <a href="@Url.Action("Index")" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        </div>
+    }
+</div>
+
+<style>
+    .btn-back {
+        border: 2px solid dodgerblue; /* Đặt đường viền */
+        background-color: dodgerblue; /* Đặt màu nền */
+        color: white; /* Đặt màu chữ */
+        padding: 5px 10px; /* Đặt khoảng cách giữa nội dung và khung */
+        border-radius: 5px; /* Đặt viền cong */
+    }
+
+        .btn-back:hover {
+            background-color: deepskyblue; /* Đổi màu nền khi di chuột qua */
+        }
+
+    .btn-delete {
+        border: 2px solid red; /* Đặt đường viền */
+        background-color: red; /* Đặt màu nền */
+        color: white; /* Đặt màu chữ */
+        padding: 5px 10px; /* Đặt khoảng cách giữa nội dung và khung */
+        border-radius: 5px; /* Đặt viền cong */
+    }
+
+        .btn-delete:hover {
+            background-color: darkred; /* Đổi màu nền khi di chuột qua */
+        }
+
+    .dl-horizontal dt {
+        float: left; /* Đặt thẻ dt sang bên trái */
+        clear: left; /* Xóa float trước đó, để thẻ dt không bị chồng chéo lên nhau */
+        width: 150px; /* Độ rộng cố định cho thẻ dt */
+        margin-right: 10px; /* Khoảng cách bên phải giữa dt và dd */
+        text-align: right; /* Căn phải nội dung trong dt */
+    }
+
+    .dl-horizontal dd {
+        margin-left: 200px; /* Độ lề bên trái cho thẻ dd */
+    }
+
+    dd {
+        border: 1px solid #ccc;
+        padding: 8px;
+        background-color: #f9f9f9;
+    }
+
+    form-control {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        color: white;
+    }
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        height: 4.5vh;
+        font-weight: bold;
+        color: black;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
